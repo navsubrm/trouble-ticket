@@ -1,0 +1,12 @@
+go into mongosh mongodb://localhost:3001
+run db.shutdownServer() to kill mongodb
+To shudown the mongodb processes run kill -2 `pgrep mongo`
+Check number of mongodb instances running: ps -ef | grep mongod | grep -v grep | wc -l | tr -d ' '
+
+//////////////////////
+Next steps:
+
+Zip files and upload for testing at work.
+
+Wait for fleet feedback.
+//////////////////////
