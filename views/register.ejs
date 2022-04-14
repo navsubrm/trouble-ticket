@@ -1,0 +1,26 @@
+<%- include('includes/header'); -%>
+
+<main class="center pri-background">
+  <div class="header-block">
+    <h1 id="title" class="uppercase"><%= title %></h1>
+    <p id="description">Complete required user data.</p>
+  </div>
+
+  <form id="add-user" name="add-user" class="center trouble-ticket" action="<%= action %>" method="post">
+    <label for="name" id="name-label" class="label">Name: </label>
+    <input type="text" name="name" id="name" class="input" placeholder="Enter Full Name" value="<%= data?.name %>" autofocus required />
+
+    <label for="username" id="username-label" class="label">Username: </label>
+    <input type="text" name="username" id="username" class="input" placeholder="Enter Username" value="<%= data?.username %>" required />
+
+    <label for="password" id="password-label" class="label">Password: </label>
+    <input type="password" name="password" id="password" class="input" placeholder="Enter password" value="<%= data?.password %>" required />
+
+    <label for="confirmPw" id="confirm-pw-label" class="label">Confirm Password: </label>
+    <input type="password" name="confirmPw" id="confirm-pw" class="input" placeholder="Confirm password" value="<%= data?.password %>" required />
+
+    <button form="add-user" type="submit" id="submit">submit</button>
+  </form>
+</main>
+
+<%- include('includes/footer'); %>

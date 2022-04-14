@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/main.css" />
+    <title><%= title %></title>
+  </head>
+  <body>
+    <%- include('flash'); -%>
+    <header id="header">
+      <div id="logo">
+        <h1><%= process.env.UNIT_TITLE %></h1>
+      </div>
+      <%- include('dynamic-query') -%>
+      <nav id="nav-bar">
+        <ul>
+          <li>
+            <a href="/" class="nav-link" aria-label="home" title="home"><img class="svg" src="/imgs/home-svgrepo-com.svg" alt="home button" /></a>
+          </li>
+          <li class="nav-link" id="ticket-nav-link" title="Ticket Actions">
+            <img class="svg nav-link-ignore" src="/imgs/ticket-svgrepo-com.svg" alt="ticket button" />
+            <ul class="nav-sub hidden" id="ticket-action-links">
+              <li><a href="/new-ticket" class="nav-link" aria-label="enter ticket">Enter New Ticket</a></li>
+              <li><a href="/ticket-list/active" class="nav-link" aria-label="view tickets">View Tickets</a></li>
+            </ul>
+          </li>
+          <li class="nav-link" id="settings-nav-link" title="Settings">
+            <img class="svg nav-link-ignore" src="/imgs/setting-svgrepo-com.svg" alt="settings button" />
+            <ul class="nav-sub hidden" id="settings-action-links">
+              <li><a href="/register" class="nav-link">Add User</a></li>
+              <li><a href="/update-user" class="nav-link">Update User</a></li>
+              <li><a href="/delete-user" class="nav-link">Delete User</a></li>
+              <li><a href="/clean-up-archive" class="nav-link">Clear Archive</a></li>
+            </ul>
+          </li>
+          <li title="Logout">
+            <form action="/logout" method="post" id="logout" class="logout-form">
+              <button type="submit" form="logout" class="nav-link"><img class="svg" src="/imgs/signout-svgrepo-com.svg" alt="signout button" /></button>
+            </form>
+          </li>
+        </ul>
+      </nav>
+      <script>
+        document.addEventListener("click", (e) => {
+          let ticket = document.querySelector("#ticket-action-links");
+          let settings = document.querySelector("#settings-action-links");
+          let id = e.target.getAttribute("id");
+          if (id == "ticket-nav-link") {
+            e.target.querySelector("ul").classList.remove("hidden");
+            settings.classList.add("hidden");
+          } else if (id == "settings-nav-link") {
+            e.target.querySelector("ul").classList.remove("hidden");
+            ticket.classList.add("hidden");
+          } else {
+            ticket.classList.add("hidden");
+            settings.classList.add("hidden");
+          }
+        });
+      </script>
+    </header>
+  </body>
+</html>

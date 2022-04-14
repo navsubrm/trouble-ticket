@@ -1,0 +1,26 @@
+<%- include('includes/header'); -%>
+
+<main class="center pri-background">
+  <div class="header-block">
+    <h1 id="title" class="uppercase"><%= title %></h1>
+    <p id="description">Complete required user data.</p>
+  </div>
+
+  <form action="/delete-user" method="post" id="user-delete-select" class="center active-ticket-list">
+    <% if(userList.length == 0){ %>
+    <div class="active-ticket-list">
+      <h2 class="mixed-case">No records were found in the <%= title %></h2>
+    </div>
+    <% } else { %>
+    <select name="userId" id="select-user" style="opacity: 0.85">
+      <option value="" hidden>Select User to Delete</option>
+      <% userList.forEach(function(user){ %>
+      <option value="<%= user._id %>"><%= user.name %> / <%= user.username %></option>
+      <% }) %>
+    </select>
+    <button type="submit" class="btn" form="user-delete-select">Delete User</button>
+  </form>
+  <% } %>
+</main>
+
+<%- include('includes/footer'); %>

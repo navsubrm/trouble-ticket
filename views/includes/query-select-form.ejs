@@ -1,0 +1,28 @@
+
+<form id="query-select-form" class="center active-ticket-list" style="margin: 15px;">
+  <label for="query-select-menu">Select by status:</label>
+  <select name="filter" id="query-select-menu" onchange="setParam()" style="opacity: .85">
+    <option value="<%= route %>" hidden <%= !route ? 'selected' : ''%> >Select a Status</option>
+    <option value="requires_action" <%= route == 'requires_action' ? 'selected' : ''%>>Requires Action</option>
+    <option value="active" <%= route == 'active' ? 'selected' : ''%>>All Active</option>
+    <option value="archive" <%= route == 'archive' ? 'selected' : ''%>>Archive</option>
+    <option value="in_progress" <%= route == 'in_progress' ? 'selected' : ''%>>In Progress</option>
+    <option value="awaiting_response" <%= route == 'awaiting_response' ? 'selected' : ''%>>Awaiting Response</option>
+    <option value="help_ticket_submitted" <%= route == 'help_ticket_submitted' ? 'selected' : ''%>>Help Ticket Submitted</option>
+    <option value="completed" <%= route == 'completed' ? 'selected' : ''%>>Completed</option>
+    <option value="engineering" <%= route == 'engineering' ? 'selected' : ''%>>Engineering Dept.</option>
+    <option value="executive" <%= route == 'executive' ? 'selected' : ''%>>Executive Dept.</option>
+    <option value="medical" <%= route == 'medical' ? 'selected' : ''%>>Medical Dept.</option>
+    <option value="navigation" <%= route == 'navigation' ? 'selected' : ''%>>Navigation Dept.</option>
+    <option value="supply" <%= route == 'supply' ? 'selected' : ''%>>Supply Dept.</option>
+    <option value="weapons" <%= route == 'weapons' ? 'selected' : ''%>>Weapons Dept.</option>
+  </select>
+  <script>
+    const setParam = () => {
+    let form = document.getElementById('query-select-form')
+    let route = document.getElementById('query-select-menu').value
+    form.action=`/ticket-list/${route}`
+    form.submit()
+    }
+  </script>
+  </form>

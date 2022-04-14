@@ -1,0 +1,789 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  --pri-text: hsl(0, 0%, 100%);
+  --pri-text-hover: hsl(0, 61%, 53%);
+  --alt-text: hsl(194, 76%, 31%);
+  --sub-form: hsl(0, 0%, 90%);
+  --form-bg: hsl(194, 76%, 31%);
+  --shadow: gray;
+  --linear-gradient: linear-gradient(160deg, rgba(28, 103, 223, .8) 0%, rgba(28, 103, 223, .4) 25%, var(--sub-form) 35%, var(--sub-form) 65%, rgba(209, 63, 63, .4) 75%, rgba(209, 63, 63, 0.8) 100%);
+  --background-img: background: url("https://www.epa.gov/sites/default/files/2019-02/nuclear_submarine_pcu_john_warner.jpg") no-repeat center;
+  font-family: sans-serif;
+  scroll-behavior: smooth;
+}
+
+.hidden {
+  visibility: hidden;
+}
+.validation-msg {
+  color: red;
+}
+
+header,
+footer {
+  position: sticky;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 25px;
+  top: 0;
+  background-color: var(--form-bg);
+  z-index: 4;
+}
+footer {
+  bottom: 0;
+  height: 50px;
+  padding: 0px 15px;
+  text-align: center;
+  gap: 20px;
+}
+footer a {
+  color: var(--pri-text);
+}
+
+#logo {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 400px;
+}
+
+#logo h1 {
+  color: var(--pri-text);
+  font-size: 1.5em;
+  z-index: 1;
+}
+#logo img {
+  position: absolute;
+  opacity: 0.7;
+  scale: 0.08;
+  transform: rotate(0deg) translateY(0px);
+}
+
+.guest-block {
+  margin-top: 15px;
+}
+#nav-bar {
+  position: relative;
+}
+
+#nav-bar ul {
+  display: flex;
+  list-style: none;
+  margin-right: 15px;
+  margin-block: 15px;
+}
+#nav-bar li {
+  margin: 0 15px;
+}
+.nav-link {
+  text-decoration: none;
+  font-size: 1em;
+  font-weight: 700;
+  color: var(--pri-text);
+}
+.nav-link img {
+  height: 25px;
+  width: 25px;
+}
+
+.nav-link-ignore {
+  pointer-events: none;
+}
+
+.nav-link:hover {
+  color: var(--pri-text-hover);
+}
+/* style was used to display alt text on hover */
+/* .nav-link img[alt]:hover::after {
+  content: attr(alt);
+  position: absolute;
+  top: -100%;
+  left: 0;
+} */
+
+.nav-sub {
+  position: absolute;
+  top: 50px;
+  transform: translateX(-25%);
+  flex-direction: column;
+  justify-content: flex-start;
+  background-color: var(--form-bg);
+  width: fit-content;
+}
+.nav-sub li {
+  padding: 15px;
+  font-size: .8em;
+}
+
+main {
+  min-height: 90vh;
+  color: var(--pri-text);
+  padding: 5%;
+}
+
+.pri-background {
+  background: var(--linear-gradient);
+}
+
+.alt-background {
+  background: var(--sub-form);
+}
+
+.login-form {
+  width: 550px;
+}
+.login-form input {
+  font-size: 1.2em;
+  margin-inline: 1em;
+  padding: 2px 5px;
+}
+
+.login-form input[type='text'], .login-form input[type='password'] {
+  width: 35%;
+}
+
+.login-btn {
+  width: 20%;
+  background-color: var(--form-bg);
+  text-transform: uppercase;
+  color: var(--pri-text);
+  border: solid 2px var(--pri-text);
+}
+.login-btn:hover {
+  color: var(--pri-text-hover);
+  border: solid 2px var(--pri-text-hover);
+}
+
+.logout-form button{
+  background-color: transparent;
+  border: none;
+}
+
+.uppercase,
+.trouble-ticket,
+.active-ticket-list {
+  text-transform: uppercase;
+}
+
+.mixed-case {
+  text-transform: capitalize;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+.center-row {
+  flex-direction: row;
+}
+
+.trouble-ticket input,
+.trouble-ticket textarea {
+  margin: 10px;
+  font-size: 1em;
+  opacity: .85;
+}
+.trouble-ticket,
+.active-ticket-list {
+  position: relative;
+  padding: 10px;
+  background-color: var(--form-bg);
+  border-radius: 0.5em;
+  box-shadow: 0 0 8px 3px var(--shadow);
+  opacity: 0.85;
+}
+
+.trouble-ticket-disable {
+  pointer-events: none;
+}
+
+.response-overlay {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 100%;
+  width: 100%; 
+  background-color: var(--form-bg);
+}
+.label,
+.ticket-details-title a {
+  align-self: flex-start;
+  width: 90%;
+  padding: 0.1em;
+  font-size: 1em;
+}
+
+.input {
+  border-radius: 0.2em;
+  padding: 5px;
+  width: 90%;
+}
+
+select {
+  font-size: 1em;
+  padding: 5px;
+  border-radius: 0.2em;
+  margin: 10px;
+  height: 35px;
+}
+
+.header-block {
+  margin-inline: auto;
+  margin-bottom: 1em;
+  width: 70%;
+  text-align: center;
+  font-weight: 700;
+}
+#title {
+  font-size: 3em;
+}
+#title,
+#description {
+  color: var(--form-bg);
+}
+
+#priority-options {
+  width: 90%;
+}
+
+.radio-options {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin: 3px;
+  padding: 3px;
+  border-radius: 1em;
+  box-shadow: inset 0 0 10px 1px var(--shadow);
+  background: var(--sub-form);
+}
+
+.radio-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 3px;
+}
+.radio-item label,
+.radio-item input {
+  margin: 5px;
+  color: var(--alt-text);
+  font-size: .8em;
+  width: fit-content;
+}
+
+.radio-item label {
+  text-align: center;
+}
+
+#start-date:valid {
+  border: solid green;
+  content: "Valid.";
+}
+
+#start-date:invalid {
+  border: solid red;
+  content: "Invalid";
+}
+
+#system {
+  position: relative;
+  width: 100%;
+}
+
+#system-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 30%);
+  margin: auto;
+  width: 80%;
+}
+
+#submit, .btn {
+  padding: 10px 18px;
+  margin: 10px;
+  width: 90%;
+  min-width: fit-content;
+  text-transform: uppercase;
+  font-size: 1.2em;
+  background-color: var(--sub-form);
+  border: 2px var(--pri-text);
+  cursor: pointer;
+}
+
+#submit:hover,
+#submit:focus {
+  background-color: var(--pri-text);
+}
+
+.btn-export {
+  background-color: var(--form-bg);
+  color: var(--pri-text);
+}
+.btn-export:hover, .btn-export:focus {
+  background-color: var(--pri-text);
+  color: var(--form-bg);
+  border: solid 2px var(--form-bg);
+}
+
+.btn-update-box {
+  align-items: stretch;
+}
+
+.btn-icon {
+  height: 40px;
+  width: 40px;
+  margin: 5px;
+  padding: 5px;
+  background-color: transparent;
+  border: none;
+}
+
+.ticket-details-title {
+  text-align: center;
+  margin-bottom: 1.5em;
+  color: var(--pri-text);
+}
+
+.ticket-details-title a, .email-send a {
+  color: var(--pri-text);
+  cursor: pointer;
+}
+
+.email-send a {
+  text-decoration: none;
+  font-size: 1.5em;
+  padding: 10px 15px;
+  border: solid 2px var(--pri-text);
+}
+
+.ticket-details {
+  width: fit-content;
+}
+.ticket-details p {
+  margin: 5px;
+  line-height: 1.5;
+}
+
+.ticket-details-width {
+  width: 65%;
+}
+#active-ticket-list {
+  width: 100%;
+}
+
+.active-ticket-list h2 {
+  margin-bottom: 5px;
+  font-size: 1.3em;
+  font-weight: bolder;
+  text-align: center;
+}
+
+.active-ticket-list p {
+  line-height: 1.3em;
+}
+#active-ticket-list form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.active-ticket-list fieldset {
+  height: 100%;
+}
+.active-ticket-list label {
+  text-align: left;
+  width: 90%;
+}
+.active-ticket-list select,
+.active-ticket-list textarea {
+  margin: 5px;
+  border-radius: 0.2em;
+  font-size: 1em;
+  width: 90%;
+}
+.active-ticket-list-details {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  margin-bottom: 5px;
+}
+.active-ticket-list-details .content {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.update-form {
+  width: 100%;
+}
+
+.p-comments {
+  overflow: auto;
+  padding: 5px;
+  cursor: pointer;
+}
+.p-comments:hover {
+  border: solid 2px var(--pri-text);
+}
+.p-size-limit {
+  max-height: 40px;
+}
+
+.p-size-expand {
+  height: 300px;
+}
+
+#archive-clear-button {
+  position: fixed;
+  top: 100px;
+  left: 40px;
+  height: 190px;
+  width: 190px;
+  opacity: 0.8;
+  background-color: var(--form-bg);
+  text-align: center;
+  z-index: 2;
+  margin: 25px;
+  padding: 25px;
+}
+#archive-clear-button button {
+  margin-top: 20px;
+  cursor: pointer;
+}
+
+#archive-clear-button span {
+  padding: 3px;
+  position: absolute;
+  right: 7px;
+  top: 7px;
+}
+#archive-clear-button span:hover,
+#archive-clear-button span:focus {
+  border: 1px solid;
+  color: var(--pri-text-hover);
+  cursor: pointer;
+}
+
+form span {
+  display: flex;
+  color: var(--pri-text);
+  margin-inline: auto;
+}
+
+/**************************************
+*
+*  Search bar styles
+*
+**************************************/
+
+.dynamic-query-form {
+  background-color: var(--sub-form);
+  padding: 5px;
+  width: 70%;
+  border-radius: 50em;
+  opacity: .85;
+}
+
+.dynamic-query-form:focus-within {
+  border: solid 4px var(--pri-text-hover);
+}
+
+.dynamic-query-form input, .dynamic-query-form input:focus {
+  width: 100%;
+  font-size: 1.2em;
+  padding: 5px 10px;
+  border-radius: 50em;
+  opacity: .85;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.btn-icon-search {
+  height: 20px;
+  width: 20px;
+  margin: 5px;
+  padding: 5px;
+  background-color: transparent;
+  border: none;
+  transform: scale(2.5);
+  cursor: pointer;
+}
+
+
+/**************************************
+*
+*   Terms of Use page styles below
+*
+**************************************/
+
+#terms-of-use {
+  padding: 20px;
+  width: 80%;
+  font-size: .8em;
+}
+#terms-of-use h2, #terms-of-use h3, #terms-of-use p, #terms-of-use ul {
+  line-height: 2em;
+  color: var(--form-bg);
+}
+
+#terms-of-use p, #terms-of-use ul {
+  text-align: justify;
+}
+#terms-of-use h3 {
+  margin-left: 2.2em;
+}
+
+#terms-of-use p {
+  margin-left: 2.5em;
+  margin-bottom: 1.3em;
+}
+#terms-of-use ul {
+  margin-left: 3.5em;
+  margin-bottom: 1.3em;
+}
+#terms-of-use li {
+  margin-bottom: .8em;
+}
+
+/**************************
+*
+*    About page styles
+*
+***************************/
+
+.main-doc {
+  top: 30px;
+  background-color: var(--sub-form);
+  color: var(--form-bg);
+}
+
+.about-header {
+  position: sticky;
+  position: -webkit-sticky;
+  position: -moz-sticky;
+  position: -ms-sticky;
+  position: -o-sticky;
+  top: 190px;
+  padding-block: 10px;
+  left: 0;
+  border-bottom: solid 3px var(--form-bg);
+  background-color: var(--sub-form);
+  z-index: 2;
+}
+
+
+#aboutNav h3 {
+  border-bottom: solid 1px var(--form-bg);
+}
+
+#aboutNav a {
+  text-decoration: none;
+  color: var(--form-bg);
+}
+
+#aboutNav h2,
+#aboutNav h3 {
+  padding: 15px;
+}
+
+.main-section {
+  padding: 25px;
+}
+
+.main-section p,
+.main-section code,
+.main-section ul,
+.main-section li {
+  margin: 5px;
+  padding: 5px;
+  line-height: 1.5;
+}
+
+.main-section ul,
+.main-section li,
+.main-section code {
+  margin-left: 35px;
+}
+
+.main-section pre {
+  font-family: Consolas, "courier new";
+  color: var(--form-bg);
+  background-color: #f1f1f1;
+  padding: 5px;
+  font-size: 90%;
+  width: fit-content;
+}
+.main-section code {
+  margin: 10px;
+}
+
+#add-user {
+  width: 400px;
+}
+
+.overdue {
+  color: var(--alt-text);
+  background-color: var(--pri-text);
+  opacity: .8;
+  font-weight: lighter;
+}
+
+/****************************
+*
+*  Alert styles
+*
+****************************/
+
+.alert {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: fit-content;
+  width: fit-content;
+  padding: 15px 20px;
+  border-radius: 0.5em;
+  visibility: hidden;
+  box-shadow: 0 5px 7px var(--pri-text);
+  pointer-events: none;
+  z-index: 10;
+}
+
+.alert span {
+  color: var(--pri-text);
+  font-size: 1.2em;
+  font-weight: 800;
+}
+
+.success {
+  background: rgba(0, 125, 0, 0.9);
+  animation: showAlert 3s linear forwards;
+}
+.warn {
+  background: rgba(173, 190, 20, .9);
+  animation: showAlert 3s linear forwards;
+}
+.danger {
+  background: rgba(190, 20, 20, .9);
+  animation: showAlert 3s linear forwards;
+}
+
+@keyframes showAlert {
+  0% {
+    opacity: 0;
+    visibility: visible;
+  }
+  5% {
+    opacity: 0.7;
+  }
+  25% {
+    opacity: 1;
+  }
+  75% {
+    opacity: 1;
+  }
+  95% {
+    opacity: 0.7;
+  }
+  99% {
+    visibility: visible;
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+/*************************
+*
+*  Media query settings
+*
+**************************/
+
+
+/* form media query */
+@media screen and (min-width: 700px) {
+  .radio-item {
+    padding: 10px;
+    margin-inline: auto;
+  }
+  .radio-item label,
+  .radio-item input {
+    margin: 10px;
+    color: var(--alt-text);
+    font-size: 1em;
+    width: fit-content;
+  }
+  .ticket-details-width {
+    width: 90%;
+  }
+  #active-ticket-list form {
+    flex-direction: row;
+  }
+  .active-ticket-list h2 {
+    text-align: left;
+  }
+  .dynamic-query-form {
+    width: 60%;
+  }
+}
+
+
+
+@media screen and (min-width: 800px) {
+  header {
+    flex-direction: row;
+    padding: 10px;
+  }
+  .guest-block {
+    flex-direction: row;
+    padding: 5px;
+    margin-top: 0;
+  }
+  .btn-update-box {
+    flex-direction: column;
+    align-content: space-between;
+  }
+  .update-form {
+    min-width: 40%;
+    max-width: 40%;
+  }
+  .dynamic-query-form {
+    width: 30%;
+  }
+  #aboutNav {
+    top: 140px;
+    left: 0;
+    height: 100%;
+    overflow-y: auto;
+  }
+  .about-header {
+    margin-bottom: 65px;
+    height: 75px;
+    top: 70px;
+  }
+  .about-left-header {
+    position: fixed;
+    border-right: solid 3px var(--form-bg);
+    width: 400px;
+  }
+  .main-section-group {
+    margin-left: 400px;
+  }
+}

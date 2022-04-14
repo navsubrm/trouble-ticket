@@ -1,0 +1,101 @@
+<%- include('includes/header'); -%>
+
+<main class="center pri-background">
+  <div class="header-block center center-column">
+    <h1 id="title" class="uppercase"><%= title %></h1>
+    <p id="description">Review and update Tickets as required.</p>
+    <%- include('includes/query-select-form') -%>
+    <form id="export-ticket-form" action="/export" method="post">
+      <input type="hidden" name="ticketList" value="<%= JSON.stringify(ticketList) %>" />
+      <input type="submit" name="export-tickets" class="btn btn-export" value="Export <%= title %>" />
+    </form>
+  </div>
+  <div id="active-ticket-list" class="center center-column">
+    <% if(ticketList.length == 0){ %>
+    <div class="active-ticket-list">
+      <h2 class="mixed-case">No records were found in the <%= title %></h2>
+    </div>
+    <% } else { %> <% ticketList.forEach(function(ticket){ %>
+    <form action="/delete/<%= ticket._id %>" id="delete-<%= ticket._id %>" method="post">
+      <!-- Grab the route variable for redirecting back to page. -->
+      <input type="hidden" name="route" value="<%= route %>">
+    </form>
+    <form
+      id="update-<%= ticket._id %>"
+      action="/update/<%= ticket._id %>"
+      method="post"
+      name="single-ticket-update"
+      class="active-ticket-list"
+      style="margin: 10px auto"
+    >
+      <div class="active-ticket-list-details">
+        <div class="content">
+          <div class="content-items">
+            <div>
+              <h2>Ticket Number: <%= ticket._id %></h2>
+              <p
+              <%= ticket.daysSinceUpdate > 1 ? 'class=overdue' : undefined %>
+              >
+              Last Update: <%= ticket.updatedAt.toLocaleDateString() %>
+              <%= ticket.daysSinceUpdate %>
+              <%= ticket.daysSinceUpdate == 1 ? "day ago." : "days ago." %> 
+              </p>
+            </div>
+            <p>Name: <%= ticket.name %></p>
+            <p>Division: <%= ticket.department %>/<%= ticket.division %></p>
+            <p>Problem Start Date: <%= ticket.dateStarted.toLocaleString() %></p>
+            <p>Priority Requested: <%= ticket.priority %></p>
+            <p class="p-comments p-size-limit">Comments (click to expand): <%= ticket.comments %></p>
+          </div>
+          <div class="center btn-update-box">
+            <button type="submit" class="btn-icon" name="update record" form="update-<%= ticket._id %>" title="Save Changes">
+              <img class="svg" src="/imgs/save-svgrepo-com.svg" alt="save button" />
+            </button>
+            <button type="submit" class="btn-icon" form="delete-<%= ticket._id %>" title="Delete Record">
+              <img class="svg" src="/imgs/delete-svgrepo-com.svg" alt="delete button" />
+            </button>
+          </div>
+      </div>
+    </div>
+        <div class="update-form">
+          <fieldset class="center active-ticket-list" style="padding: 7px">
+            <!-- Grab the route variable for redirecting back to page. -->
+            <input type="hidden" name="route" value="<%= route %>">
+            <label for="ticket-status">Status:</label>
+            <select name="ticketStatus" id="ticket-status">
+              <option value="" disabled hidden <%= !ticket.ticketStatus ? 'selected' : ''%> >Select a Status</option>
+              <option value="in-progress" <%= ticket.ticketStatus == 'in-progress' ? 'selected' : ''%>>In Progress</option>
+              <option value="awaiting-response" <%= ticket.ticketStatus == 'awaiting-response' ? 'selected' : ''%> >Awaiting Response</option>
+              <option value="help-ticket-submitted" <%= ticket.ticketStatus == 'help-ticket-submitted' ? 'selected' : ''%> >311 Ticket Submitted</option>
+              <option value="completed" <%= ticket.ticketStatus == 'completed' ? 'selected' : ''%> >Completed</option>
+              <option value="archive" <%= ticket.ticketStatus == 'archive' ? 'selected' : ''%> >Archive</option>
+            </select>
+            <label for="name">Comments:</label>
+            <textarea id="iw-comments" name="iwComments" cols="50" rows="5" placeholder="Add details to understand the status."><%= ticket.iwComments %></textarea>
+          </fieldset>
+        </div>
+    </form>
+    <% }) %> <% } %>
+  </div>
+  <script>
+    document.addEventListener("click", (e) => {
+      const target = e.target.classList.contains('p-comments')
+      const nonTarget = Array.from(document.querySelectorAll('.p-comments'))
+      if(target){
+        nonTarget.forEach(cur => {
+          cur.classList.add('p-size-limit')
+          cur.classList.remove('p-size-expand')
+        })
+        e.target.classList.toggle('p-size-limit')
+        e.target.classList.toggle('p-size-expand')
+      } else {
+        nonTarget.forEach(cur => {
+          cur.classList.add('p-size-limit')
+          cur.classList.remove('p-size-expand')
+        })
+      }
+    })
+  </script>
+</main>
+
+<%- include('includes/footer'); %>

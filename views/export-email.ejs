@@ -1,0 +1,18 @@
+<%- include('includes/header'); -%>
+
+<main id="response-overlay-success" class="pri-background">
+  <div class="center response-overlay">
+    <div id="response-overlay-fail">
+      <div class="center email-send">
+        <a
+          href="mailto:<%= process.env.SEND_TO_EMAIL %>?cc=<%= process.env.SA_GROUP %>&subject=<%= emailSubject %>&body=The following data has been exported from <%= process.env.UNIT_TITLE %> on <%= new
+          Date().toLocaleDateString() %>:%0D%0D<% content.forEach(cur => { %> %0D------------------------------------------------------------------------------------------------------------------------%0D%0DTicket Number: <%= cur._id %>%0DLast Update: <%= new Date(cur.updatedAt).toLocaleDateString() %>%0DName: <%= cur.name %>%0DDivision: <%= cur.department %>/<%= cur.division %>%0DProblem Start Date: <%= new Date(cur.dateStarted).toLocaleDateString() %>%0DPriority Requested: <%= cur.priority %>%0DComments: <%= cur.comments %>%0D%0D------------------------------------------------------------------------------------------------------------------------%0D
+            <% }) %>"
+          >Send Email</a
+        >
+      </div>
+    </div>
+  </div>
+</main>
+
+<%- include('includes/footer'); %>

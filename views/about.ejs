@@ -1,0 +1,145 @@
+<%- include('includes/header'); -%>
+
+<main id="main-doc" class="main-doc alt-background">
+  <nav id="aboutNav" class="about-left-header">
+    <header class="about-header about-left-header uppercase">
+      <h2>Trouble Ticket Manager</h2>
+    </header>
+    <h3><a class="nav-link" href="#Basic_Introduction">Basic Introduction</a></h3>
+    <h3><a class="nav-link" href="#New_Ticket_Submission">Public New Ticket Entry Form</a></h3>
+    <h3><a class="nav-link" href="#Active_Ticket_List">Ticket Management</a></h3>
+    <h3><a class="nav-link" href="#Archived_Ticket_List">Settings and DB Maintenance</a></h3>
+    <h3><a class="nav-link" href="#Miscellaneous_Items">Miscellaneous Items</a></h3>
+    <!-- Make this an aside element that takes up the left hand side of the page. -->
+  </nav>
+
+  <div class="main-section-group">
+    <section id="Basic_Introduction" class="main-section">
+      <header class="about-header">
+        <h2>Basic Introduction</h2>
+      </header>
+      <p>The Information Systems Team Trouble Ticket Tracker is a web based system to support trouble ticket entry and management.</p>
+      <p>The system is comprised of three main sections:</p>
+
+      <ul>
+        <li>Public New Ticket Entry Form</li>
+        <li>Ticket Management</li>
+        <li>Settings and DB Maintenance</li>
+      </ul>
+
+      <p>
+        The three interfaces allow for tickets to be entered by non-users and IW division. Only approved users are able to manage status and issue resolution.
+        Resolved tickets are retained in the Archived Ticket List for a minimum of 1 year after archive to ensure continuity between crews.
+      </p>
+    </section>
+
+    <section id="New_Ticket_Submission" class="main-section">
+      <header class="about-header">
+        <h2>Public New Ticket Entry Form</h2>
+      </header>
+      <p>To enter a new ticket the visitor will enter the following information:</p>
+      <ul>
+        <li>1. Name should include enough detail for IW division personnel to contact you.</li>
+        <li>2. Department</li>
+        <li>3. Division should be the proper name of the division.</li>
+        <li>4. Date the issue started should be the date that the issue was first discovered.</li>
+        <li>
+          5. Requested priority should be an honest request for assistance (<strong
+            >Not all requests are immediate. Be judicious if you want to be taken seriously.</strong
+          >).
+          <ul>
+            <li>Immediate: 12 Hours</li>
+            <li>High Priority: 24 Hours</li>
+            <li>Priority: 48-72 Hours</li>
+            <li>Routine: 1 week</li>
+            <li>Not Applicable: Ticket submitted for tracking and notification only.</li>
+          </ul>
+        </li>
+        <li>
+          6. Detailed description should include an identification of the machine and system impacted by the issue. It should also contain a complete
+          description of the problem with enough information to assist IW division in immediately responding to the issue. If IW division has to gather
+          additional information to troubleshoot, it will delay restoration of asset.
+        </li>
+      </ul>
+
+      <p>
+        If you receive an error on submission, you should read the error warning and use the contact link to inform IW division of the issue so that it can be
+        corrected.
+      </p>
+    </section>
+
+    <section id="Active_Ticket_List" class="main-section">
+      <header class="about-header">
+        <h2>Ticket Management</h2>
+      </header>
+
+      <h3>Ticket Actions</h3>
+
+      <p>
+        Under the ticket actions menu, tickets can be sorted by status, department, or using the text search option in the header. The text search field will
+        only compare whole strings, so care should be taken to minimize the input initially to return the most related tickets.
+      </p>
+
+      <p>
+        Any of the ticket lists allow for the list to be exported via email to support NOSR and ISIC engagement in corrective actions. To export the list,
+        select the export list button under the header and select "send email" to auto-generated an email containing appropriate addresses and ticket
+        information.
+      </p>
+
+      <h3>Ticket List</h3>
+      <p>
+        The ticket list is used to manage status of tickets from submission until resolution. When viewing the ticket list, ITS' can update ticket status and
+        add comments for team awareness and turnover. Tickets are in-progress when active troubleshooting is occurring. A ticket would be either Help Ticket
+        Submitted or Awaiting reply when no further action can be taken without additional assistance. Once the ticket is completed, it should be marked
+        complete for review by the ISSM and transition to the archive list.
+      </p>
+
+      <h3>Archive Ticket List</h3>
+      <p>
+        The Archived Ticket List is a list of all archived tickets that have not been cleared or are less than 24 months old. This allows time to recover
+        tickets that were inadvertently archived or not correctly resolved before archive. This will also allow the alternate crew on two-crew submarines to get
+        a good understanding of the previous crews network status at turnover.
+      </p>
+    </section>
+
+    <section id="Archived_Ticket_List" class="main-section">
+      <header class="about-header">
+        <h2>Settings and DB Maintenance</h2>
+      </header>
+
+      <h3>Add User</h3>
+      <p>
+        The add user link allows current users to create additional accounts as necessary to manage trouble-ticket resolution. User accounts require a name,
+        username, and password. The username must be between 5 and 15 characters. The password must have 2 uppercase, 2 lowercase, 2 special characters, and 2
+        numbers.
+      </p>
+      <h3>Edit User</h3>
+      <p>
+        The update user link allows for the current signed in user to modify their own account information. Password change time requirements are not
+        automatically enforced and must be managed by the IW team.
+      </p>
+
+      <h3>Delete User</h3>
+      <p>
+        Users can be deleted by selecting delete user from the settings menu. A list of all users will be populated. Select a user from the list to delete the
+        account.
+      </p>
+
+      <h3>Clean Archive</h3>
+      <p>
+        To clear archived tickets, select the clear archive on the setting menu in the header. All archive records that have had an arhive status greater than
+        24 months will be removed from the database. An alert will provide the exact number of tickets removed during the action.
+      </p>
+    </section>
+
+    <section id="Miscellaneous_Items" class="main-section">
+      <header class="about-header">
+        <h2>Miscellaneous Items</h2>
+      </header>
+      <p>Any questions, comments, or requests for updates and features can be directed to the contact us link in the footer.</p>
+      <p>Thank you for using the Trouble Ticket Management System.</p>
+    </section>
+  </div>
+</main>
+
+<%- include('includes/footer'); %>

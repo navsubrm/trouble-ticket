@@ -1,0 +1,71 @@
+<main class="center pri-background">
+  <div class="header-block">
+    <h1 id="title" class="uppercase"><%= title %></h1>
+    <p id="description">Add the required information below and IW division will get back to you with a solution.</p>
+  </div>
+
+  <form id="trouble-ticket" name="trouble-ticket" class="center trouble-ticket" action="/submit" method="post">
+    <label for="name" id="name-label" class="label">Name:</label>
+    <input type="text" name="name" id="name" class="input" placeholder="Enter Full Name" autofocus required />
+
+    <label for="drop-down" id="dropdown-label" class="label">Department:</label>
+    <select id="dropdown" name="department" class="input" required>
+      <option value="" default disabled>Select Current Department From List.</option>
+      <option value="engineering">Engineering</option>
+      <option value="executive">Executive</option>
+      <option value="medical">Medical</option>
+      <option value="navigation">Navigation</option>
+      <option value="supply">Supply</option>
+      <option value="weapons">Weapons</option>
+    </select>
+
+    <label for="division" id="division-label" class="label">Division:</label>
+    <input type="text" placeholder="Enter your Division." class="input" name="division" id="division" required />
+
+    <label for="start-date" id="start-date-label" class="label">Date issue Started:</label>
+    <input id="start-date" name="dateStarted" class="input" type="datetime-local" required placeholder="Enter date issue started." />
+
+    <div id="priority-options">
+      <label class="label"
+        >Priority Requested for the trouble ticket:
+        <div class="radio-options">
+          <div class="radio-item">
+            <input type="radio" name="priority" value="5" id="immediate" />
+            <label for="priority-group" class="label">Immediate</label>
+          </div>
+
+          <div class="radio-item">
+            <input type="radio" name="priority" value="4" id="high-priority" />
+            <label for="priority-group" class="label">High Priority</label>
+          </div>
+
+          <div class="radio-item">
+            <input type="radio" name="priority" value="3" id="priority" />
+            <label for="priority-group" class="label">Priority</label>
+          </div>
+
+          <div class="radio-item">
+            <input type="radio" name="priority" value="2" id="routine" />
+            <label for="priority-group" class="label">Routine</label>
+          </div>
+
+          <div class="radio-item">
+            <input type="radio" name="priority" value="1" id="none" />
+            <label for="priority-group" class="label">Not Applicable</label>
+          </div>
+        </div>
+      </label>
+    </div>
+    <label for="form-comments" id="form-comments-label" class="label">Detailed description of the problem:</label>
+    <textarea
+      id="form-comments"
+      rows="10"
+      class="input"
+      form="trouble-ticket"
+      name="comments"
+      placeholder="Enter a clear description of the associate device, systems effected, and any additional comments you believe would be helpful for IW division to resolve the issue you are experiencing."
+    ></textarea>
+
+    <button form="trouble-ticket" type="submit" id="submit">submit</button>
+  </form>
+</main>
